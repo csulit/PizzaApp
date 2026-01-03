@@ -1,9 +1,13 @@
-import { FC } from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import type { FC } from "react"
+import { Image, View } from "react-native"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import Animated from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { ListItem } from "@/components/ListItem"
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
+import { useAnimatedTabBarInset, useHideTabBarOnScroll } from "@/context/TabBarVisibilityContext"
 import { isRTL } from "@/i18n"
 import { DemoTabScreenProps } from "@/navigators/navigationTypes"
 import { useAppTheme } from "@/theme/context"
@@ -19,8 +23,24 @@ const reactNativeRadioLogo = require("@assets/images/demo/rnr-logo.png")
 export const DemoCommunityScreen: FC<DemoTabScreenProps<"DemoCommunity">> =
   function DemoCommunityScreen(_props) {
     const { themed } = useAppTheme()
+    const { bottom } = useSafeAreaInsets()
+    const { onScroll, onScrollBeginDrag, onScrollEndDrag, onMomentumScrollEnd } =
+      useHideTabBarOnScroll()
+    const { animatedSpacerStyle } = useAnimatedTabBarInset(bottom)
+
     return (
-      <Screen preset="scroll" contentContainerStyle={$styles.container} safeAreaEdges={["top"]}>
+      <Screen
+        preset="scroll"
+        contentContainerStyle={$styles.container}
+        safeAreaEdges={["top"]}
+        ScrollViewProps={{
+          onScroll,
+          onScrollBeginDrag,
+          onScrollEndDrag,
+          onMomentumScrollEnd,
+          scrollEventThrottle: 16,
+        }}
+      >
         <Text preset="heading" tx="demoCommunityScreen:title" style={themed($title)} />
         <Text tx="demoCommunityScreen:tagLine" style={themed($tagline)} />
 
@@ -106,6 +126,8 @@ export const DemoCommunityScreen: FC<DemoTabScreenProps<"DemoCommunity">> =
           rightIcon={isRTL ? "caretLeft" : "caretRight"}
           onPress={() => openLinkInBrowser("https://infinite.red/contact")}
         />
+        {/* Animated spacer for tab bar */}
+        <Animated.View style={animatedSpacerStyle} />
       </Screen>
     )
   }

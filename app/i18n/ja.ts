@@ -91,6 +91,10 @@ const ja: Translations = {
     reportBugs: "バグをレポートする",
     demoList: "デモリスト",
     demoPodcastList: "デモのポッドキャストリスト",
+    systemTheme: "現在のシステムテーマ: {{theme}}",
+    appTheme: "現在のアプリテーマ: {{theme}}",
+    resetTheme: "リセット",
+    toggleTheme: "テーマを切り替え: {{theme}}",
     androidReactotronHint:
       "もし動かなければ、Reactotronのデスクトップアプリが実行されていることを確認して, このコマンドをターミナルで実行した後、アプリをアプリをリロードしてください。 adb reverse tcp:9090 tcp:9090",
     iosReactotronHint:

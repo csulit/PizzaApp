@@ -89,6 +89,10 @@ const en = {
     reportBugs: "Report Bugs",
     demoList: "Demo List",
     demoPodcastList: "Demo Podcast List",
+    systemTheme: "Current system theme: {{theme}}",
+    appTheme: "Current app theme: {{theme}}",
+    resetTheme: "Reset",
+    toggleTheme: "Toggle Theme: {{theme}}",
     androidReactotronHint:
       "If this doesn't work, ensure the Reactotron desktop app is running, run adb reverse tcp:9090 tcp:9090 from your terminal, and reload the app.",
     iosReactotronHint:

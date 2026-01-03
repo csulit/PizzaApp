@@ -92,6 +92,10 @@ const es: Translations = {
     reportBugs: "Reportar errores",
     demoList: "Lista demo",
     demoPodcastList: "Lista demo de podcasts",
+    systemTheme: "Tema del sistema actual: {{theme}}",
+    appTheme: "Tema de la app actual: {{theme}}",
+    resetTheme: "Restablecer",
+    toggleTheme: "Cambiar tema: {{theme}}",
     androidReactotronHint:
       "Si esto no funciona, asegúrate de que la app de escritorio de Reactotron se esté ejecutando, corre adb reverse tcp:9090 tcp:9090 desde tu terminal, y luego recarga la app.",
     iosReactotronHint:
