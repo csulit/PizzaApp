@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react"
 import type { StyleProp, ViewStyle } from "react-native"
-import Animated, { useAnimatedStyle, interpolate } from "react-native-reanimated"
+import Animated, { Extrapolation, interpolate, useAnimatedStyle } from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { useTabBarVisibility } from "@/context/TabBarVisibilityContext"
@@ -15,6 +15,10 @@ interface AnimatedHeaderProps extends PropsWithChildren {
    * Background color for the header container
    */
   backgroundColor?: string
+  /**
+   * Enable opacity fade during scroll animation (default: true for Twitter-style)
+   */
+  enableOpacity?: boolean
 }
 
 const $container: ViewStyle = {
@@ -29,27 +33,50 @@ const $container: ViewStyle = {
  * An animated header container that hides when scrolling down and shows when scrolling up.
  * Uses the TabBarVisibilityContext for state management, syncing with the tab bar animation.
  *
+ * Supports Twitter/X-style scroll-driven animations with optional opacity fade.
+ *
  * @example
  * ```tsx
- * <AnimatedHeader backgroundColor={colors.background}>
+ * <AnimatedHeader backgroundColor={colors.background} enableOpacity>
  *   <DrawerIconButton onPress={toggleDrawer} />
  * </AnimatedHeader>
  * ```
  */
 export function AnimatedHeader(props: AnimatedHeaderProps) {
-  const { children, style, backgroundColor } = props
+  const { children, style, backgroundColor, enableOpacity = true } = props
   const { top } = useSafeAreaInsets()
   const { tabBarProgress } = useTabBarVisibility()
 
   const totalHeight = HEADER_HEIGHT + top
 
   const animatedStyle = useAnimatedStyle(() => {
-    const translateY = interpolate(tabBarProgress.value, [0, 1], [0, -totalHeight])
+    const translateY = interpolate(
+      tabBarProgress.value,
+      [0, 1],
+      [0, -totalHeight],
+      Extrapolation.CLAMP,
+    )
 
-    return {
+    const animStyle: { transform: { translateY: number }[]; opacity?: number } = {
       transform: [{ translateY }],
     }
-  }, [totalHeight])
+
+    if (enableOpacity) {
+      // X/Twitter-style opacity fade:
+      // - Fully visible (1.0) when progress is 0
+      // - Starts fading at 0.3 progress for smooth transition
+      // - Reaches minimum (0.7) when fully hidden
+      // This creates the "weighted" feel where the bar seems to have substance
+      animStyle.opacity = interpolate(
+        tabBarProgress.value,
+        [0, 0.3, 0.7, 1],
+        [1, 0.98, 0.85, 0.7],
+        Extrapolation.CLAMP,
+      )
+    }
+
+    return animStyle
+  }, [totalHeight, enableOpacity])
 
   return (
     <Animated.View style={[$container, { paddingTop: top, backgroundColor }, style, animatedStyle]}>

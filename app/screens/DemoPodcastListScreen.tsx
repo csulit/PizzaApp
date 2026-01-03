@@ -1,6 +1,6 @@
 import type { ComponentType, FC } from "react"
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { ActivityIndicator, Image, Platform, StyleSheet, View } from "react-native"
+import { ActivityIndicator, Image, Platform, View } from "react-native"
 import type {
   AccessibilityProps,
   ImageSourcePropType,
@@ -25,7 +25,7 @@ import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
 import { Switch } from "@/components/Toggle/Switch"
 import { useEpisodes, useEpisode } from "@/context/EpisodeContext"
-import { useAnimatedTabBarInset, useHideTabBarOnScroll } from "@/context/TabBarVisibilityContext"
+import { useAnimatedTabBarInset, useScrollDrivenBars } from "@/context/TabBarVisibilityContext"
 import { isRTL } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { DemoTabScreenProps } from "@/navigators/navigationTypes"
@@ -47,8 +47,8 @@ const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
 export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = (_props) => {
   const { themed } = useAppTheme()
   const { bottom } = useSafeAreaInsets()
-  const { onScroll, onScrollBeginDrag, onScrollEndDrag, onMomentumScrollEnd } =
-    useHideTabBarOnScroll()
+  // Twitter/X-style scroll-driven animation
+  const { scrollHandler } = useScrollDrivenBars()
   const { animatedSpacerStyle } = useAnimatedTabBarInset(bottom)
   const {
     totalEpisodes,
@@ -89,10 +89,7 @@ export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = 
         refreshing={refreshing}
         onRefresh={manualRefresh}
         keyExtractor={(item) => item.guid}
-        onScroll={onScroll}
-        onScrollBeginDrag={onScrollBeginDrag}
-        onScrollEndDrag={onScrollEndDrag}
-        onMomentumScrollEnd={onMomentumScrollEnd}
+        onScroll={scrollHandler}
         scrollEventThrottle={16}
         ListEmptyComponent={
           isLoading ? (
@@ -228,12 +225,7 @@ const EpisodeCard = ({
         return (
           <View>
             <Animated.View
-              style={[
-                $styles.row,
-                themed($iconContainer),
-                StyleSheet.absoluteFill,
-                animatedLikeButtonStyles,
-              ]}
+              style={[$styles.row, themed($iconContainer), $absoluteFill, animatedLikeButtonStyles]}
             >
               <Icon
                 icon="heart"
@@ -388,5 +380,13 @@ const $emptyState: ThemedStyle<ViewStyle> = ({ spacing }) => ({
 
 const $emptyStateImage: ImageStyle = {
   transform: [{ scaleX: isRTL ? -1 : 1 }],
+}
+
+const $absoluteFill: ViewStyle = {
+  position: "absolute",
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
 }
 // #endregion
