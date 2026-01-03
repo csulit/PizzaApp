@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, type PropsWithChildren } from "react"
 import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native"
 import {
-  Extrapolation,
   interpolate,
   useAnimatedReaction,
   useAnimatedScrollHandler,
@@ -512,59 +511,5 @@ export function useScrollDrivenBars(options: UseScrollDrivenBarsOptions = {}) {
     tabBarProgress,
     isUserScrolling,
     currentDirection,
-  }
-}
-
-/**
- * Hook that returns animated styles with opacity support for scroll-driven animations.
- * Use this with AnimatedTabBar/AnimatedHeader for Twitter-style fade effects.
- *
- * @example
- * ```tsx
- * const { animatedBarStyle } = useAnimatedBarStyle(totalHeight, 'down')
- * // Returns { transform: [{ translateY }], opacity }
- * ```
- */
-export function useAnimatedBarStyle(
-  totalHeight: number,
-  direction: "up" | "down",
-  enableOpacity = true,
-) {
-  const { tabBarProgress } = useTabBarVisibility()
-
-  const animatedBarStyle = useAnimatedStyle(() => {
-    // For tab bar (direction = 'down'): translate down to hide
-    // For header (direction = 'up'): translate up to hide
-    const translateY = interpolate(
-      tabBarProgress.value,
-      [0, 1],
-      [0, direction === "down" ? totalHeight : -totalHeight],
-      Extrapolation.CLAMP,
-    )
-
-    const baseStyle: { transform: { translateY: number }[]; opacity?: number } = {
-      transform: [{ translateY }],
-    }
-
-    if (enableOpacity) {
-      // X/Twitter-style opacity fade:
-      // - Fully visible (1.0) when progress is 0
-      // - Starts fading at 0.3 progress for smooth transition
-      // - Reaches minimum (0.7) when fully hidden
-      // This creates the "weighted" feel where the bar seems to have substance
-      baseStyle.opacity = interpolate(
-        tabBarProgress.value,
-        [0, 0.3, 0.7, 1],
-        [1, 0.98, 0.85, 0.7],
-        Extrapolation.CLAMP,
-      )
-    }
-
-    return baseStyle
-  }, [totalHeight, direction, enableOpacity])
-
-  return {
-    animatedBarStyle,
-    tabBarProgress,
   }
 }
