@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { AnimatedTabBar } from "@/components/AnimatedTabBar"
-import { Icon } from "@/components/Icon"
+import { AnimatedTabIcon } from "@/components/AnimatedTabIcon"
 import { EpisodeProvider } from "@/context/EpisodeContext"
 import { TabBarVisibilityProvider } from "@/context/TabBarVisibilityContext"
 import { translate } from "@/i18n/translate"
@@ -54,8 +54,10 @@ export function DemoNavigator() {
             options={{
               tabBarLabel: translate("demoNavigator:componentsTab"),
               tabBarIcon: ({ focused }) => (
-                <Icon
+                <AnimatedTabIcon
                   icon="components"
+                  // filledIcon="componentsFilled" // Add when filled icons are available
+                  focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
                 />
@@ -69,8 +71,10 @@ export function DemoNavigator() {
             options={{
               tabBarLabel: translate("demoNavigator:communityTab"),
               tabBarIcon: ({ focused }) => (
-                <Icon
+                <AnimatedTabIcon
                   icon="community"
+                  // filledIcon="communityFilled" // Add when filled icons are available
+                  focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
                 />
@@ -85,8 +89,10 @@ export function DemoNavigator() {
               tabBarAccessibilityLabel: translate("demoNavigator:podcastListTab"),
               tabBarLabel: translate("demoNavigator:podcastListTab"),
               tabBarIcon: ({ focused }) => (
-                <Icon
+                <AnimatedTabIcon
                   icon="podcast"
+                  // filledIcon="podcastFilled" // Add when filled icons are available
+                  focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
                 />
@@ -100,7 +106,13 @@ export function DemoNavigator() {
             options={{
               tabBarLabel: translate("demoNavigator:debugTab"),
               tabBarIcon: ({ focused }) => (
-                <Icon icon="debug" color={focused ? colors.tint : colors.tintInactive} size={30} />
+                <AnimatedTabIcon
+                  icon="debug"
+                  // filledIcon="debugFilled" // Add when filled icons are available
+                  focused={focused}
+                  color={focused ? colors.tint : colors.tintInactive}
+                  size={30}
+                />
               ),
             }}
           />
