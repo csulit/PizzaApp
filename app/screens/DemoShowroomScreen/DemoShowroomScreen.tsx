@@ -8,10 +8,15 @@ import { Drawer } from "react-native-drawer-layout"
 import Animated from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import { AnimatedHeader } from "@/components/AnimatedHeader"
 import { ListItem } from "@/components/ListItem"
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
-import { useAnimatedTabBarInset, useHideTabBarOnScroll } from "@/context/TabBarVisibilityContext"
+import {
+  useAnimatedHeaderStyle,
+  useAnimatedTabBarInset,
+  useHideTabBarOnScroll,
+} from "@/context/TabBarVisibilityContext"
 import { TxKeyPath, isRTL } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { DemoTabParamList, DemoTabScreenProps } from "@/navigators/navigationTypes"
@@ -122,10 +127,11 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const params = route.params
 
     const { themed, theme } = useAppTheme()
-    const { bottom } = useSafeAreaInsets()
+    const { top, bottom } = useSafeAreaInsets()
     const { onScroll, onScrollBeginDrag, onScrollEndDrag, onMomentumScrollEnd } =
       useHideTabBarOnScroll()
     const { animatedSpacerStyle } = useAnimatedTabBarInset(bottom)
+    const { animatedTopPaddingStyle } = useAnimatedHeaderStyle(top)
 
     const toggleDrawer = useCallback(() => {
       if (!open) {
@@ -235,11 +241,12 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
       >
         <Screen
           preset="fixed"
-          safeAreaEdges={["top"]}
           contentContainerStyle={$styles.flex1}
           {...(isAndroid ? { KeyboardAvoidingViewProps: { behavior: undefined } } : {})}
         >
-          <DrawerIconButton onPress={toggleDrawer} />
+          <AnimatedHeader backgroundColor={theme.colors.background}>
+            <DrawerIconButton onPress={toggleDrawer} />
+          </AnimatedHeader>
 
           <SectionListWithKeyboardAwareScrollView
             ref={listRef}
@@ -264,9 +271,12 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
             )}
             renderSectionFooter={() => <View style={themed($demoUseCasesSpacer)} />}
             ListHeaderComponent={
-              <View style={themed($heading)}>
-                <Text preset="heading" tx="demoShowroomScreen:jumpStart" />
-              </View>
+              <>
+                <Animated.View style={animatedTopPaddingStyle} />
+                <View style={themed($heading)}>
+                  <Text preset="heading" tx="demoShowroomScreen:jumpStart" />
+                </View>
+              </>
             }
             onScrollToIndexFailed={scrollToIndexFailed}
             renderSectionHeader={({ section }) => {

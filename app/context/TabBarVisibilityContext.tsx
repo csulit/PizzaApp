@@ -9,7 +9,7 @@ import {
   type SharedValue,
 } from "react-native-reanimated"
 
-import { TAB_BAR_HEIGHT } from "@/navigators/constants"
+import { HEADER_HEIGHT, TAB_BAR_HEIGHT } from "@/navigators/constants"
 
 interface TabBarVisibilityContextValue {
   /** Animated value: 0 = visible, 1 = hidden */
@@ -216,6 +216,51 @@ export function useAnimatedTabBarInset(bottomInset: number) {
     animatedPaddingStyle,
     animatedSpacerStyle,
     animatedContentStyle: animatedPaddingStyle, // alias for backward compat
+    tabBarProgress,
+  }
+}
+
+/**
+ * Hook that returns animated styles for header that hides on scroll.
+ * Uses the same progress value as the tab bar so they animate together.
+ *
+ * @example
+ * ```tsx
+ * const { animatedHeaderStyle } = useAnimatedHeaderStyle(top)
+ *
+ * return (
+ *   <Animated.View style={[styles.header, animatedHeaderStyle]}>
+ *     <HeaderContent />
+ *   </Animated.View>
+ * )
+ * ```
+ */
+export function useAnimatedHeaderStyle(topInset: number) {
+  const { tabBarProgress } = useTabBarVisibility()
+
+  const totalHeight = HEADER_HEIGHT + topInset
+
+  // Animate header upward (negative translateY) when hiding
+  const animatedHeaderStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(tabBarProgress.value, [0, 1], [0, -totalHeight])
+
+    return {
+      transform: [{ translateY }],
+    }
+  }, [totalHeight])
+
+  // For content that needs to adjust its top padding when header hides
+  const animatedTopPaddingStyle = useAnimatedStyle(() => {
+    const paddingTop = interpolate(tabBarProgress.value, [0, 1], [totalHeight, topInset])
+
+    return {
+      paddingTop,
+    }
+  }, [totalHeight, topInset])
+
+  return {
+    animatedHeaderStyle,
+    animatedTopPaddingStyle,
     tabBarProgress,
   }
 }
