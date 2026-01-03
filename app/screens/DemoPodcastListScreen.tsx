@@ -1,15 +1,11 @@
-import { ComponentType, FC, useCallback, useEffect, useMemo, useState } from "react"
-import {
+import type { ComponentType, FC } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { ActivityIndicator, Image, Platform, StyleSheet, View } from "react-native"
+import type {
   AccessibilityProps,
-  ActivityIndicator,
-  FlatList,
-  Image,
   ImageSourcePropType,
   ImageStyle,
-  Platform,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from "react-native"
 import Animated, {
@@ -19,6 +15,7 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Button, type ButtonAccessoryProps } from "@/components/Button"
 import { Card } from "@/components/Card"
@@ -28,6 +25,7 @@ import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
 import { Switch } from "@/components/Toggle/Switch"
 import { useEpisodes, useEpisode } from "@/context/EpisodeContext"
+import { useAnimatedTabBarInset, useHideTabBarOnScroll } from "@/context/TabBarVisibilityContext"
 import { isRTL } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { DemoTabScreenProps } from "@/navigators/navigationTypes"
@@ -48,6 +46,10 @@ const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
 
 export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = (_props) => {
   const { themed } = useAppTheme()
+  const { bottom } = useSafeAreaInsets()
+  const { onScroll, onScrollBeginDrag, onScrollEndDrag, onMomentumScrollEnd } =
+    useHideTabBarOnScroll()
+  const { animatedSpacerStyle } = useAnimatedTabBarInset(bottom)
   const {
     totalEpisodes,
     totalFavorites,
@@ -80,13 +82,18 @@ export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = 
 
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={$styles.flex1}>
-      <FlatList<EpisodeItem>
+      <Animated.FlatList<EpisodeItem>
         contentContainerStyle={themed([$styles.container, $listContentContainer])}
         data={episodesForList}
         extraData={totalEpisodes + totalFavorites}
         refreshing={refreshing}
         onRefresh={manualRefresh}
         keyExtractor={(item) => item.guid}
+        onScroll={onScroll}
+        onScrollBeginDrag={onScrollBeginDrag}
+        onScrollEndDrag={onScrollEndDrag}
+        onMomentumScrollEnd={onMomentumScrollEnd}
+        scrollEventThrottle={16}
         ListEmptyComponent={
           isLoading ? (
             <ActivityIndicator />
@@ -127,6 +134,7 @@ export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = 
         renderItem={({ item }) => (
           <EpisodeCard episode={item} onPressFavorite={() => toggleFavorite(item)} />
         )}
+        ListFooterComponent={<Animated.View style={animatedSpacerStyle} />}
       />
     </Screen>
   )

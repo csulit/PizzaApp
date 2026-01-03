@@ -1,20 +1,17 @@
-import { FC, useCallback, useMemo } from "react"
-import {
-  LayoutAnimation,
-  Linking,
-  Platform,
-  TextStyle,
-  useColorScheme,
-  View,
-  ViewStyle,
-} from "react-native"
+import type { FC } from "react"
+import { useCallback, useMemo } from "react"
+import { LayoutAnimation, Linking, Platform, useColorScheme, View } from "react-native"
+import type { TextStyle, ViewStyle } from "react-native"
 import * as Application from "expo-application"
+import Animated from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Button } from "@/components/Button"
 import { ListItem } from "@/components/ListItem"
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
 import { useAuth } from "@/context/AuthContext"
+import { useAnimatedTabBarInset, useHideTabBarOnScroll } from "@/context/TabBarVisibilityContext"
 import { isRTL } from "@/i18n"
 import { DemoTabScreenProps } from "@/navigators/navigationTypes"
 import { useAppTheme } from "@/theme/context"
@@ -36,6 +33,10 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
 ) {
   const { setThemeContextOverride, themeContext, themed } = useAppTheme()
   const { logout } = useAuth()
+  const { bottom } = useSafeAreaInsets()
+  const { onScroll, onScrollBeginDrag, onScrollEndDrag, onMomentumScrollEnd } =
+    useHideTabBarOnScroll()
+  const { animatedSpacerStyle } = useAnimatedTabBarInset(bottom)
 
   // @ts-expect-error
   const usingFabric = global.nativeFabricUIManager != null
@@ -76,6 +77,13 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
       preset="scroll"
       safeAreaEdges={["top"]}
       contentContainerStyle={[$styles.container, themed($container)]}
+      ScrollViewProps={{
+        onScroll,
+        onScrollBeginDrag,
+        onScrollEndDrag,
+        onMomentumScrollEnd,
+        scrollEventThrottle: 16,
+      }}
     >
       <Text
         style={themed($reportBugsLink)}
@@ -84,12 +92,16 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
       />
 
       <Text style={themed($title)} preset="heading" tx="demoDebugScreen:title" />
-      <Text preset="bold">Current system theme: {colorScheme}</Text>
-      <Text preset="bold">Current app theme: {themeContext}</Text>
-      <Button onPress={resetTheme} text={`Reset`} />
+      <Text preset="bold" tx="demoDebugScreen:systemTheme" txOptions={{ theme: colorScheme }} />
+      <Text preset="bold" tx="demoDebugScreen:appTheme" txOptions={{ theme: themeContext }} />
+      <Button onPress={resetTheme} tx="demoDebugScreen:resetTheme" />
 
       <View style={themed($itemsContainer)}>
-        <Button onPress={toggleTheme} text={`Toggle Theme: ${themeContext}`} />
+        <Button
+          onPress={toggleTheme}
+          tx="demoDebugScreen:toggleTheme"
+          txOptions={{ theme: themeContext }}
+        />
       </View>
       <View style={themed($itemsContainer)}>
         <ListItem
@@ -148,6 +160,8 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
       <View style={themed($buttonContainer)}>
         <Button style={themed($button)} tx="common:logOut" onPress={logout} />
       </View>
+      {/* Animated spacer for tab bar */}
+      <Animated.View style={animatedSpacerStyle} />
     </Screen>
   )
 }

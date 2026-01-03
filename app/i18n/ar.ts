@@ -89,6 +89,10 @@ const ar: Translations = {
     reportBugs: "الابلاغ عن اخطاء",
     demoList: "قائمة تجريبية",
     demoPodcastList: "قائمة البودكاست التجريبي",
+    systemTheme: "سمة النظام الحالية: {{theme}}",
+    appTheme: "سمة التطبيق الحالية: {{theme}}",
+    resetTheme: "إعادة تعيين",
+    toggleTheme: "تبديل السمة: {{theme}}",
     androidReactotronHint:
       "اذا لم ينجح ذللك، فتأكد من تشغيل تطبيق الحاسوب الخاص Reactotron، وقم بتشغيل عكس adb tcp:9090 \ntcp:9090 من جهازك الطرفي ، واعد تحميل التطبيق",
     iosReactotronHint:

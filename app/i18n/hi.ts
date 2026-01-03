@@ -90,6 +90,10 @@ const hi: Translations = {
     reportBugs: "बग्स की रिपोर्ट करें",
     demoList: "डेमो सूची",
     demoPodcastList: "डेमो पॉडकास्ट सूची",
+    systemTheme: "वर्तमान सिस्टम थीम: {{theme}}",
+    appTheme: "वर्तमान ऐप थीम: {{theme}}",
+    resetTheme: "रीसेट",
+    toggleTheme: "थीम बदलें: {{theme}}",
     androidReactotronHint:
       "यदि यह काम नहीं करता है, तो सुनिश्चित करें कि Reactotron डेस्कटॉप ऐप चल रहा है, अपने टर्मिनल से adb reverse tcp:9090 tcp:9090 चलाएं, और ऐप को पुनः लोड करें।",
     iosReactotronHint:

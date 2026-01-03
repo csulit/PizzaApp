@@ -1,20 +1,17 @@
-import { FC, ReactElement, useCallback, useEffect, useRef, useState } from "react"
-import {
-  FlatList,
-  Image,
-  ImageStyle,
-  Platform,
-  SectionList,
-  TextStyle,
-  View,
-  ViewStyle,
-} from "react-native"
-import { Link, RouteProp, useRoute } from "@react-navigation/native"
+import type { FC, ReactElement } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { FlatList, Image, Platform, SectionList, View } from "react-native"
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { Link, useRoute } from "@react-navigation/native"
+import type { RouteProp } from "@react-navigation/native"
 import { Drawer } from "react-native-drawer-layout"
+import Animated from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { ListItem } from "@/components/ListItem"
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
+import { useAnimatedTabBarInset, useHideTabBarOnScroll } from "@/context/TabBarVisibilityContext"
 import { TxKeyPath, isRTL } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { DemoTabParamList, DemoTabScreenProps } from "@/navigators/navigationTypes"
@@ -125,6 +122,10 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const params = route.params
 
     const { themed, theme } = useAppTheme()
+    const { bottom } = useSafeAreaInsets()
+    const { onScroll, onScrollBeginDrag, onScrollEndDrag, onMomentumScrollEnd } =
+      useHideTabBarOnScroll()
+    const { animatedSpacerStyle } = useAnimatedTabBarInset(bottom)
 
     const toggleDrawer = useCallback(() => {
       if (!open) {
@@ -244,6 +245,11 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
             ref={listRef}
             contentContainerStyle={themed($sectionListContentContainer)}
             stickySectionHeadersEnabled={false}
+            onScroll={onScroll}
+            onScrollBeginDrag={onScrollBeginDrag}
+            onScrollEndDrag={onScrollEndDrag}
+            onMomentumScrollEnd={onMomentumScrollEnd}
+            scrollEventThrottle={16}
             sections={Object.values(Demos).map((d) => ({
               name: d.name,
               description: d.description,
@@ -273,6 +279,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
                 </View>
               )
             }}
+            ListFooterComponent={<Animated.View style={animatedSpacerStyle} />}
           />
         </Screen>
       </Drawer>

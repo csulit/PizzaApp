@@ -90,6 +90,10 @@ const ko: Translations = {
     reportBugs: "버그 보고하기",
     demoList: "데모 목록",
     demoPodcastList: "데모 팟캐스트 목록",
+    systemTheme: "현재 시스템 테마: {{theme}}",
+    appTheme: "현재 앱 테마: {{theme}}",
+    resetTheme: "초기화",
+    toggleTheme: "테마 전환: {{theme}}",
     androidReactotronHint:
       "만약에 동작하지 않는 경우, Reactotron 데스크탑 앱이 실행중인지 확인 후, 터미널에서 adb reverse tcp:9090 tcp:9090 을 실행한 다음 앱을 다시 실행해보세요.",
     iosReactotronHint:

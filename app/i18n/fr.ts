@@ -92,6 +92,10 @@ const fr: Translations = {
     reportBugs: "Signaler des bugs",
     demoList: "Liste de démonstration",
     demoPodcastList: "Liste de podcasts de démonstration",
+    systemTheme: "Thème système actuel : {{theme}}",
+    appTheme: "Thème de l'application actuel : {{theme}}",
+    resetTheme: "Réinitialiser",
+    toggleTheme: "Changer le thème : {{theme}}",
     androidReactotronHint:
       "Si cela ne fonctionne pas, assurez-vous que l'application de bureau Reactotron est en cours d'exécution, exécutez adb reverse tcp:9090 tcp:9090 à partir de votre terminal, puis rechargez l'application.",
     iosReactotronHint:
