@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react"
 import type { ViewStyle } from "react-native"
-import { Dimensions } from "react-native"
+import { useWindowDimensions } from "react-native"
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import { BottomTabBar } from "@react-navigation/bottom-tabs"
 import Animated, {
@@ -15,8 +15,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTabBarVisibility } from "@/context/TabBarVisibilityContext"
 import { TAB_BAR_HEIGHT } from "@/navigators/constants"
 import { useAppTheme } from "@/theme/context"
-
-const SCREEN_WIDTH = Dimensions.get("window").width
 
 /** Indicator bar dimensions */
 const INDICATOR_HEIGHT = 3
@@ -74,13 +72,14 @@ export function AnimatedTabBar(props: AnimatedTabBarProps) {
   const {
     theme: { colors },
   } = useAppTheme()
+  const { width: screenWidth } = useWindowDimensions()
 
   const totalHeight = TAB_BAR_HEIGHT + bottom
 
   // Get current tab index from navigation state
   const tabCount = tabBarProps.state.routes.length
   const currentIndex = tabBarProps.state.index
-  const tabWidth = SCREEN_WIDTH / tabCount
+  const tabWidth = screenWidth / tabCount
 
   // Shared value for indicator position
   const indicatorX = useSharedValue(currentIndex * tabWidth + tabWidth / 2 - indicatorWidth / 2)
