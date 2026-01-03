@@ -2,6 +2,10 @@ export interface ConfigBaseProps {
   persistNavigation: "always" | "dev" | "prod" | "never"
   catchErrors: "always" | "dev" | "prod" | "never"
   exitRoutes: string[]
+  posthog: {
+    apiKey: string
+    host: string
+  }
 }
 
 export type PersistNavigationConfig = ConfigBaseProps["persistNavigation"]
@@ -21,6 +25,16 @@ const BaseConfig: ConfigBaseProps = {
    * is pressed while in that screen. Only affects Android.
    */
   exitRoutes: ["Welcome"],
+
+  /**
+   * PostHog analytics configuration.
+   * Set EXPO_PUBLIC_POSTHOG_API_KEY and EXPO_PUBLIC_POSTHOG_HOST in your .env file.
+   * Get your API key from: https://app.posthog.com/project/settings
+   */
+  posthog: {
+    apiKey: process.env.EXPO_PUBLIC_POSTHOG_API_KEY ?? "",
+    host: process.env.EXPO_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
+  },
 }
 
 export default BaseConfig

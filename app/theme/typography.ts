@@ -1,31 +1,38 @@
-// TODO: write documentation about fonts and typography along with guides on how to add custom fonts in own
-// markdown file and add links from here
-
 import { Platform } from "react-native"
 import {
-  SpaceGrotesk_300Light as spaceGroteskLight,
-  SpaceGrotesk_400Regular as spaceGroteskRegular,
-  SpaceGrotesk_500Medium as spaceGroteskMedium,
-  SpaceGrotesk_600SemiBold as spaceGroteskSemiBold,
-  SpaceGrotesk_700Bold as spaceGroteskBold,
-} from "@expo-google-fonts/space-grotesk"
+  Inter_300Light as interLight,
+  Inter_400Regular as interRegular,
+  Inter_500Medium as interMedium,
+  Inter_600SemiBold as interSemiBold,
+  Inter_700Bold as interBold,
+} from "@expo-google-fonts/inter"
 
+/**
+ * Custom fonts to load via expo-font.
+ * Inter is loaded from Google Fonts, Cal Sans is loaded as a local asset.
+ */
 export const customFontsToLoad = {
-  spaceGroteskLight,
-  spaceGroteskRegular,
-  spaceGroteskMedium,
-  spaceGroteskSemiBold,
-  spaceGroteskBold,
+  interLight,
+  interRegular,
+  interMedium,
+  interSemiBold,
+  interBold,
+  // Cal Sans is loaded separately as a local font asset
+  "CalSans-Regular": require("@assets/fonts/CalSans-Regular.ttf"),
 }
 
 const fonts = {
-  spaceGrotesk: {
-    // Cross-platform Google font.
-    light: "spaceGroteskLight",
-    normal: "spaceGroteskRegular",
-    medium: "spaceGroteskMedium",
-    semiBold: "spaceGroteskSemiBold",
-    bold: "spaceGroteskBold",
+  calSans: {
+    // Cal Sans - geometric display font for headlines
+    normal: "CalSans-Regular",
+  },
+  inter: {
+    // Inter - versatile body font
+    light: "interLight",
+    normal: "interRegular",
+    medium: "interMedium",
+    semiBold: "interSemiBold",
+    bold: "interBold",
   },
   helveticaNeue: {
     // iOS only font.
@@ -57,13 +64,15 @@ export const typography = {
    */
   fonts,
   /**
-   * The primary font. Used in most places.
+   * The primary font. Used for body text and UI elements.
+   * Inter - highly readable, versatile, full weight range.
    */
-  primary: fonts.spaceGrotesk,
+  primary: fonts.inter,
   /**
-   * An alternate font used for perhaps titles and stuff.
+   * The display font. Used for headlines and titles.
+   * Cal Sans - geometric, modern, tight spacing.
    */
-  secondary: Platform.select({ ios: fonts.helveticaNeue, android: fonts.sansSerif }),
+  display: fonts.calSans,
   /**
    * Lets get fancy with a monospace font!
    */
