@@ -1,11 +1,34 @@
+import { useEffect, useMemo } from "react"
 import type { ViewStyle } from "react-native"
+import { useWindowDimensions } from "react-native"
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import { BottomTabBar } from "@react-navigation/bottom-tabs"
-import Animated, { Extrapolation, interpolate, useAnimatedStyle } from "react-native-reanimated"
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { useTabBarVisibility } from "@/context/TabBarVisibilityContext"
 import { TAB_BAR_HEIGHT } from "@/navigators/constants"
+import { useAppTheme } from "@/theme/context"
+
+/** Indicator bar dimensions */
+const INDICATOR_HEIGHT = 3
+const INDICATOR_BORDER_RADIUS = INDICATOR_HEIGHT / 2
+
+/**
+ * Spring configuration for indicator slide animation.
+ * Creates a smooth, slightly bouncy slide effect.
+ */
+const INDICATOR_SPRING = {
+  damping: 20,
+  stiffness: 300,
+  mass: 0.8,
+}
 
 const $container: ViewStyle = {
   position: "absolute",
@@ -17,6 +40,10 @@ const $container: ViewStyle = {
 interface AnimatedTabBarProps extends BottomTabBarProps {
   /** Enable opacity fade during scroll animation (default: true for Twitter-style) */
   enableOpacity?: boolean
+  /** Enable sliding indicator beneath active tab (default: true for X-style) */
+  enableIndicator?: boolean
+  /** Width of the indicator bar (default: 24) */
+  indicatorWidth?: number
 }
 
 /**
@@ -34,11 +61,34 @@ interface AnimatedTabBarProps extends BottomTabBarProps {
  * ```
  */
 export function AnimatedTabBar(props: AnimatedTabBarProps) {
-  const { enableOpacity = true, ...tabBarProps } = props
+  const {
+    enableOpacity = true,
+    enableIndicator = true,
+    indicatorWidth = 24,
+    ...tabBarProps
+  } = props
   const { bottom } = useSafeAreaInsets()
   const { tabBarProgress } = useTabBarVisibility()
+  const {
+    theme: { colors },
+  } = useAppTheme()
+  const { width: screenWidth } = useWindowDimensions()
 
   const totalHeight = TAB_BAR_HEIGHT + bottom
+
+  // Get current tab index from navigation state
+  const tabCount = tabBarProps.state.routes.length
+  const currentIndex = tabBarProps.state.index
+  const tabWidth = screenWidth / tabCount
+
+  // Shared value for indicator position
+  const indicatorX = useSharedValue(currentIndex * tabWidth + tabWidth / 2 - indicatorWidth / 2)
+
+  // Animate indicator when tab changes
+  useEffect(() => {
+    const targetX = currentIndex * tabWidth + tabWidth / 2 - indicatorWidth / 2
+    indicatorX.value = withSpring(targetX, INDICATOR_SPRING)
+  }, [currentIndex, tabWidth, indicatorWidth, indicatorX])
 
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(
@@ -69,8 +119,27 @@ export function AnimatedTabBar(props: AnimatedTabBarProps) {
     return style
   }, [totalHeight, enableOpacity])
 
+  // Animated style for the sliding indicator
+  const indicatorAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: indicatorX.value }],
+  }))
+
+  const $indicator = useMemo(
+    (): ViewStyle => ({
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: indicatorWidth,
+      height: INDICATOR_HEIGHT,
+      borderRadius: INDICATOR_BORDER_RADIUS,
+      backgroundColor: colors.tint,
+    }),
+    [indicatorWidth, colors.tint],
+  )
+
   return (
     <Animated.View style={[$container, animatedStyle]}>
+      {enableIndicator && <Animated.View style={[$indicator, indicatorAnimatedStyle]} />}
       <BottomTabBar {...tabBarProps} />
     </Animated.View>
   )
