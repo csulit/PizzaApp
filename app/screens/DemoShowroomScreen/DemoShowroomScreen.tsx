@@ -2,6 +2,7 @@ import type { FC, ReactElement } from "react"
 import { useCallback, useMemo } from "react"
 import { View } from "react-native"
 import type { TextStyle, ViewStyle } from "react-native"
+import { AnimatedLegendList } from "@legendapp/list/reanimated"
 import Animated from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -107,10 +108,10 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     return (
       <Screen preset="fixed" contentContainerStyle={$styles.flex1}>
         <AnimatedHeader backgroundColor={theme.colors.background}>
-          <Text preset="bold" style={themed($headerTitle)} text="Components" />
+          <Text preset="bold" style={themed($headerTitle)} tx="demoShowroomScreen:title" />
         </AnimatedHeader>
 
-        <Animated.FlatList<DemoListData>
+        <AnimatedLegendList<DemoListData>
           data={flatListData}
           renderItem={renderItem}
           keyExtractor={(item) => `${item.type}-${item.index}`}
@@ -119,6 +120,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
           scrollEventThrottle={16}
           ListHeaderComponent={ListHeader}
           ListFooterComponent={<Animated.View style={animatedSpacerStyle} />}
+          estimatedItemSize={200}
         />
       </Screen>
     )
