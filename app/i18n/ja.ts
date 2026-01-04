@@ -75,12 +75,31 @@ const ja: Translations = {
     hireUsLink: "メッセージを送る",
   },
   demoShowroomScreen: {
+    title: "コンポーネント",
     jumpStart: "あなたのプロジェクトをスタートさせるコンポーネントです！",
     lorem2Sentences:
       "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
     demoHeaderTxExample: "Yay",
     demoViaTxProp: "`tx`から",
     demoViaSpecifiedTxProp: "`{{prop}}Tx`から",
+  },
+  propertyListScreen: {
+    headerTitle: "物件",
+    title: "夢のマイホームを見つけよう",
+    subtitle: "厳選された物件コレクションをご覧ください",
+    searchPlaceholder: "都市、住所、名前で検索...",
+    featuredOnly: "注目物件のみ",
+    resultsCount: "{{count}}件の物件が見つかりました",
+  },
+  propertyDetailScreen: {
+    newBadge: "新着",
+    featuredBadge: "注目",
+    beds: "寝室",
+    baths: "バス",
+    sqft: "平方フィート",
+    yearBuilt: "築年",
+    descriptionTitle: "説明",
+    amenitiesTitle: "設備",
   },
   demoDebugScreen: {
     howTo: "ハウツー",
