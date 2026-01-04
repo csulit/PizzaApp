@@ -45,10 +45,10 @@ const hi: Translations = {
     hint: "संकेत: आप किसी भी ईमेल पते और अपने पसंदीदा पासवर्ड का उपयोग कर सकते हैं :)",
   },
   demoNavigator: {
-    componentsTab: "कंपोनेंट्स",
-    debugTab: "डीबग",
-    communityTab: "समुदाय",
-    podcastListTab: "पॉडकास्ट",
+    homeTab: "होम",
+    profileTab: "प्रोफ़ाइल",
+    savedTab: "सहेजा गया",
+    messageTab: "संदेश",
   },
   demoCommunityScreen: {
     title: "समुदाय से जुड़ें",

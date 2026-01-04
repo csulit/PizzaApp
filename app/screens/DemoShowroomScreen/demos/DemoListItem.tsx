@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { TextStyle, View, ViewStyle } from "react-native"
-import { FlatList } from "react-native-gesture-handler"
+import { ScrollView, TextStyle, View, ViewStyle } from "react-native"
 
 import { Icon } from "@/components/Icon"
 import { ListItem } from "@/components/ListItem"
@@ -160,18 +159,17 @@ export const DemoListItem: Demo = {
       description="demoListItem:useCase.listIntegration.description"
     >
       <View style={themed($listStyle)}>
-        <FlatList<string>
-          data={listData}
-          keyExtractor={(item, index) => `${item}-${index}`}
-          renderItem={({ item, index }) => (
+        <ScrollView nestedScrollEnabled>
+          {listData.map((item, index) => (
             <ListItem
+              key={`${item}-${index}`}
               text={item}
               rightIcon="caretRight"
               TextProps={{ numberOfLines: 1 }}
               topSeparator={index !== 0}
             />
-          )}
-        />
+          ))}
+        </ScrollView>
       </View>
     </DemoUseCase>,
 

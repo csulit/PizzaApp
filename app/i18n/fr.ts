@@ -46,10 +46,10 @@ const fr: Translations = {
     hint: "Astuce : vous pouvez utiliser n'importe quelle adresse e-mail et votre mot de passe préféré :)",
   },
   demoNavigator: {
-    componentsTab: "Composants",
-    debugTab: "Débogage",
-    communityTab: "Communauté",
-    podcastListTab: "Podcasts",
+    homeTab: "Accueil",
+    profileTab: "Profil",
+    savedTab: "Enregistré",
+    messageTab: "Message",
   },
   demoCommunityScreen: {
     title: "Connectez-vous avec la communauté",

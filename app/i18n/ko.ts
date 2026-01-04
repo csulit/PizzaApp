@@ -45,10 +45,10 @@ const ko: Translations = {
     hint: "힌트: 가장 좋아하는 암호와 아무런 아무 이메일 주소나 사용할 수 있어요 :)",
   },
   demoNavigator: {
-    componentsTab: "컴포넌트",
-    debugTab: "디버그",
-    communityTab: "커뮤니티",
-    podcastListTab: "팟캐스트",
+    homeTab: "홈",
+    profileTab: "프로필",
+    savedTab: "저장됨",
+    messageTab: "메시지",
   },
   demoCommunityScreen: {
     title: "커뮤니티와 함께해요",
