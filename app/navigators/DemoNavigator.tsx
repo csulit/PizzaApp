@@ -10,7 +10,7 @@ import { translate } from "@/i18n/translate"
 import { DemoCommunityScreen } from "@/screens/DemoCommunityScreen"
 import { DemoDebugScreen } from "@/screens/DemoDebugScreen"
 import { DemoPodcastListScreen } from "@/screens/DemoPodcastListScreen"
-import { DemoShowroomScreen } from "@/screens/DemoShowroomScreen/DemoShowroomScreen"
+import { PropertyListScreen } from "@/screens/PropertyListScreen"
 import { useAppTheme } from "@/theme/context"
 import type { ThemedStyle } from "@/theme/types"
 
@@ -50,7 +50,7 @@ export function DemoNavigator() {
         >
           <Tab.Screen
             name="DemoShowroom"
-            component={DemoShowroomScreen}
+            component={PropertyListScreen}
             options={{
               tabBarLabel: translate("demoNavigator:homeTab"),
               tabBarIcon: ({ focused }) => (

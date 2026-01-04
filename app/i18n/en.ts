@@ -126,6 +126,24 @@ const en = {
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
   },
+  propertyListScreen: {
+    headerTitle: "Properties",
+    title: "Find Your Dream Home",
+    subtitle: "Browse our exclusive collection of properties",
+    searchPlaceholder: "Search by city, address, or name...",
+    featuredOnly: "Featured Only",
+    resultsCount: "{{count}} properties found",
+  },
+  propertyDetailScreen: {
+    newBadge: "NEW",
+    featuredBadge: "FEATURED",
+    beds: "Beds",
+    baths: "Baths",
+    sqft: "Sq Ft",
+    yearBuilt: "Year Built",
+    descriptionTitle: "Description",
+    amenitiesTitle: "Amenities",
+  },
 
   ...demoEn,
 }

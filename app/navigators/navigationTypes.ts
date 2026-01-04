@@ -7,6 +7,8 @@ import {
 } from "@react-navigation/native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 
+import type { Property } from "@/data/properties"
+
 // Demo Tab Navigator types
 export type DemoTabParamList = {
   DemoCommunity: undefined
@@ -20,6 +22,7 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
+  PropertyDetail: { property: Property }
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
