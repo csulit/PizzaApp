@@ -46,10 +46,10 @@ const ja: Translations = {
     hint: "ヒント: お好みのメールアドレスとパスワードを使ってください :)",
   },
   demoNavigator: {
-    componentsTab: "コンポーネント",
-    debugTab: "デバッグ",
-    communityTab: "コミュニティ",
-    podcastListTab: "ポッドキャスト",
+    homeTab: "ホーム",
+    profileTab: "プロフィール",
+    savedTab: "保存済み",
+    messageTab: "メッセージ",
   },
   demoCommunityScreen: {
     title: "コミュニティと繋がろう",

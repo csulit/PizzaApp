@@ -52,11 +52,11 @@ export function DemoNavigator() {
             name="DemoShowroom"
             component={DemoShowroomScreen}
             options={{
-              tabBarLabel: translate("demoNavigator:componentsTab"),
+              tabBarLabel: translate("demoNavigator:homeTab"),
               tabBarIcon: ({ focused }) => (
                 <AnimatedTabIcon
-                  icon="components"
-                  // filledIcon="componentsFilled" // Add when filled icons are available
+                  icon="home"
+                  // filledIcon="homeFilled" // Add when filled icons are available
                   focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
@@ -69,11 +69,11 @@ export function DemoNavigator() {
             name="DemoCommunity"
             component={DemoCommunityScreen}
             options={{
-              tabBarLabel: translate("demoNavigator:communityTab"),
+              tabBarLabel: translate("demoNavigator:savedTab"),
               tabBarIcon: ({ focused }) => (
                 <AnimatedTabIcon
-                  icon="community"
-                  // filledIcon="communityFilled" // Add when filled icons are available
+                  icon="heart"
+                  // filledIcon="heartFilled" // Add when filled icons are available
                   focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
@@ -86,12 +86,12 @@ export function DemoNavigator() {
             name="DemoPodcastList"
             component={DemoPodcastListScreen}
             options={{
-              tabBarAccessibilityLabel: translate("demoNavigator:podcastListTab"),
-              tabBarLabel: translate("demoNavigator:podcastListTab"),
+              tabBarAccessibilityLabel: translate("demoNavigator:messageTab"),
+              tabBarLabel: translate("demoNavigator:messageTab"),
               tabBarIcon: ({ focused }) => (
                 <AnimatedTabIcon
-                  icon="podcast"
-                  // filledIcon="podcastFilled" // Add when filled icons are available
+                  icon="messageSquare"
+                  // filledIcon="messageSquareFilled" // Add when filled icons are available
                   focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
@@ -104,11 +104,11 @@ export function DemoNavigator() {
             name="DemoDebug"
             component={DemoDebugScreen}
             options={{
-              tabBarLabel: translate("demoNavigator:debugTab"),
+              tabBarLabel: translate("demoNavigator:profileTab"),
               tabBarIcon: ({ focused }) => (
                 <AnimatedTabIcon
-                  icon="debug"
-                  // filledIcon="debugFilled" // Add when filled icons are available
+                  icon="user"
+                  // filledIcon="userFilled" // Add when filled icons are available
                   focused={focused}
                   color={focused ? colors.tint : colors.tintInactive}
                   size={30}
