@@ -49,6 +49,7 @@ const ko: Translations = {
     profileTab: "프로필",
     savedTab: "저장됨",
     messageTab: "메시지",
+    menuTitle: "메뉴",
   },
   demoCommunityScreen: {
     title: "커뮤니티와 함께해요",
@@ -74,12 +75,31 @@ const ko: Translations = {
     hireUsLink: "메세지 보내기",
   },
   demoShowroomScreen: {
+    title: "컴포넌트",
     jumpStart: "프로젝트를 바로 시작할 수 있는 컴포넌트들!",
     lorem2Sentences:
       "별 하나에 추억과, 별 하나에 사랑과, 별 하나에 쓸쓸함과, 별 하나에 동경(憧憬)과, 별 하나에 시와, 별 하나에 어머니, 어머니",
     demoHeaderTxExample: "야호",
     demoViaTxProp: "`tx` Prop 을 통해",
     demoViaSpecifiedTxProp: "`{{prop}}Tx` Prop 을 통해",
+  },
+  propertyListScreen: {
+    headerTitle: "부동산",
+    title: "꿈의 집을 찾아보세요",
+    subtitle: "독점 부동산 컬렉션을 둘러보세요",
+    searchPlaceholder: "도시, 주소 또는 이름으로 검색...",
+    featuredOnly: "추천 매물만",
+    resultsCount: "{{count}}개의 매물을 찾았습니다",
+  },
+  propertyDetailScreen: {
+    newBadge: "신규",
+    featuredBadge: "추천",
+    beds: "침실",
+    baths: "욕실",
+    sqft: "평방피트",
+    yearBuilt: "건축년도",
+    descriptionTitle: "설명",
+    amenitiesTitle: "편의시설",
   },
   demoDebugScreen: {
     howTo: "사용방법",

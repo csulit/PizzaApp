@@ -49,6 +49,7 @@ const hi: Translations = {
     profileTab: "प्रोफ़ाइल",
     savedTab: "सहेजा गया",
     messageTab: "संदेश",
+    menuTitle: "मेन्यू",
   },
   demoCommunityScreen: {
     title: "समुदाय से जुड़ें",
@@ -74,12 +75,31 @@ const hi: Translations = {
     hireUsLink: "हमें एक संदेश भेजें",
   },
   demoShowroomScreen: {
+    title: "कंपोनेंट्स",
     jumpStart: "अपने प्रोजेक्ट को जंप स्टार्ट करने के लिए कंपोनेंट्स!",
     lorem2Sentences:
       "कोई भी काम जो आप नहीं करना चाहते, उसे करने के लिए किसी और को ढूंढना चाहिए। जो लोग दूसरों की मदद करते हैं, वे खुद की भी मदद करते हैं।",
     demoHeaderTxExample: "हाँ",
     demoViaTxProp: "`tx` प्रॉप के माध्यम से",
     demoViaSpecifiedTxProp: "`{{prop}}Tx` प्रॉप के माध्यम से",
+  },
+  propertyListScreen: {
+    headerTitle: "प्रॉपर्टीज़",
+    title: "अपने सपनों का घर खोजें",
+    subtitle: "हमारे विशेष प्रॉपर्टी संग्रह को ब्राउज़ करें",
+    searchPlaceholder: "शहर, पता या नाम से खोजें...",
+    featuredOnly: "केवल फीचर्ड",
+    resultsCount: "{{count}} प्रॉपर्टीज़ मिलीं",
+  },
+  propertyDetailScreen: {
+    newBadge: "नया",
+    featuredBadge: "विशेष",
+    beds: "बेड",
+    baths: "बाथ",
+    sqft: "वर्ग फुट",
+    yearBuilt: "निर्माण वर्ष",
+    descriptionTitle: "विवरण",
+    amenitiesTitle: "सुविधाएं",
   },
   demoDebugScreen: {
     howTo: "कैसे करें",

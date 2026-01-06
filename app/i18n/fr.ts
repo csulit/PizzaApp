@@ -50,6 +50,7 @@ const fr: Translations = {
     profileTab: "Profil",
     savedTab: "Enregistré",
     messageTab: "Message",
+    menuTitle: "Menu",
   },
   demoCommunityScreen: {
     title: "Connectez-vous avec la communauté",
@@ -76,12 +77,31 @@ const fr: Translations = {
     hireUsLink: "Envoyez-nous un message",
   },
   demoShowroomScreen: {
+    title: "Composants",
     jumpStart: "Composants pour démarrer votre projet !",
     lorem2Sentences:
       "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
     demoHeaderTxExample: "Yay",
     demoViaTxProp: "Via la propriété `tx`",
     demoViaSpecifiedTxProp: "Via la propriété `{{prop}}Tx` spécifiée",
+  },
+  propertyListScreen: {
+    headerTitle: "Propriétés",
+    title: "Trouvez Votre Maison de Rêve",
+    subtitle: "Parcourez notre collection exclusive de propriétés",
+    searchPlaceholder: "Rechercher par ville, adresse ou nom...",
+    featuredOnly: "En Vedette Uniquement",
+    resultsCount: "{{count}} propriétés trouvées",
+  },
+  propertyDetailScreen: {
+    newBadge: "NOUVEAU",
+    featuredBadge: "EN VEDETTE",
+    beds: "Chambres",
+    baths: "Salles de bain",
+    sqft: "Pi²",
+    yearBuilt: "Année de Construction",
+    descriptionTitle: "Description",
+    amenitiesTitle: "Équipements",
   },
   demoDebugScreen: {
     howTo: "COMMENT FAIRE",

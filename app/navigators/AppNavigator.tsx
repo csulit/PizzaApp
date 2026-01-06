@@ -12,6 +12,7 @@ import { AnalyticsProvider } from "@/context/AnalyticsContext"
 import { useAuth } from "@/context/AuthContext"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { LoginScreen } from "@/screens/LoginScreen"
+import { PropertyDetailScreen } from "@/screens/PropertyDetailScreen"
 import { WelcomeScreen } from "@/screens/WelcomeScreen"
 import { useAppTheme } from "@/theme/context"
 
@@ -51,6 +52,14 @@ const AppStack = () => {
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
 
           <Stack.Screen name="Demo" component={DemoNavigator} />
+
+          <Stack.Screen
+            name="PropertyDetail"
+            component={PropertyDetailScreen}
+            options={{
+              animation: "fade",
+            }}
+          />
         </>
       ) : (
         <>

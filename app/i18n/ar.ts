@@ -49,6 +49,7 @@ const ar: Translations = {
     profileTab: "الملف الشخصي",
     savedTab: "المحفوظة",
     messageTab: "رسالة",
+    menuTitle: "القائمة",
   },
   demoCommunityScreen: {
     title: "تواصل مع المجتمع",
@@ -74,12 +75,31 @@ const ar: Translations = {
     hireUsLink: "ارسل لنا رسالة",
   },
   demoShowroomScreen: {
+    title: "المكونات",
     jumpStart: "مكونات او عناصر لبدء مشروعك",
     lorem2Sentences:
       "عامل الناس بأخلاقك لا بأخلاقهم. عامل الناس بأخلاقك لا بأخلاقهم. عامل الناس بأخلاقك لا بأخلاقهم",
     demoHeaderTxExample: "ياي",
     demoViaTxProp: "عبر `tx` Prop",
     demoViaSpecifiedTxProp: "Prop `{{prop}}Tx` عبر",
+  },
+  propertyListScreen: {
+    headerTitle: "العقارات",
+    title: "ابحث عن منزل أحلامك",
+    subtitle: "تصفح مجموعتنا الحصرية من العقارات",
+    searchPlaceholder: "البحث حسب المدينة أو العنوان أو الاسم...",
+    featuredOnly: "المميزة فقط",
+    resultsCount: "تم العثور على {{count}} عقار",
+  },
+  propertyDetailScreen: {
+    newBadge: "جديد",
+    featuredBadge: "مميز",
+    beds: "غرف نوم",
+    baths: "حمامات",
+    sqft: "قدم مربع",
+    yearBuilt: "سنة البناء",
+    descriptionTitle: "الوصف",
+    amenitiesTitle: "المرافق",
   },
   demoDebugScreen: {
     howTo: "كيف",
