@@ -50,6 +50,7 @@ const es: Translations = {
     profileTab: "Perfil",
     savedTab: "Guardado",
     messageTab: "Mensaje",
+    menuTitle: "Menú",
   },
   demoCommunityScreen: {
     title: "Conecta con la comunidad",

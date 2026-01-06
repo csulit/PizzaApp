@@ -49,6 +49,7 @@ const ko: Translations = {
     profileTab: "프로필",
     savedTab: "저장됨",
     messageTab: "메시지",
+    menuTitle: "메뉴",
   },
   demoCommunityScreen: {
     title: "커뮤니티와 함께해요",

@@ -50,6 +50,7 @@ const ja: Translations = {
     profileTab: "プロフィール",
     savedTab: "保存済み",
     messageTab: "メッセージ",
+    menuTitle: "メニュー",
   },
   demoCommunityScreen: {
     title: "コミュニティと繋がろう",

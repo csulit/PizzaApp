@@ -48,6 +48,7 @@ const en = {
     profileTab: "Profile",
     savedTab: "Saved",
     messageTab: "Message",
+    menuTitle: "Menu",
   },
   demoCommunityScreen: {
     title: "Connect with the community",

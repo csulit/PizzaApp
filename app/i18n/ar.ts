@@ -49,6 +49,7 @@ const ar: Translations = {
     profileTab: "الملف الشخصي",
     savedTab: "المحفوظة",
     messageTab: "رسالة",
+    menuTitle: "القائمة",
   },
   demoCommunityScreen: {
     title: "تواصل مع المجتمع",

@@ -49,6 +49,7 @@ const hi: Translations = {
     profileTab: "प्रोफ़ाइल",
     savedTab: "सहेजा गया",
     messageTab: "संदेश",
+    menuTitle: "मेन्यू",
   },
   demoCommunityScreen: {
     title: "समुदाय से जुड़ें",

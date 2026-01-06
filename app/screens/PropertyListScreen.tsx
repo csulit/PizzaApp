@@ -7,12 +7,14 @@ import Animated from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { AnimatedHeader } from "@/components/AnimatedHeader"
+import { DrawerIconButton } from "@/components/DrawerIconButton"
 import { Icon } from "@/components/Icon"
 import { PropertyCard } from "@/components/PropertyCard"
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
 import { TextField } from "@/components/TextField"
 import { Switch } from "@/components/Toggle/Switch"
+import { useDrawer } from "@/context/DrawerContext"
 import {
   useAnimatedHeaderStyle,
   useAnimatedTabBarInset,
@@ -31,6 +33,7 @@ export const PropertyListScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const { navigation } = props
     const { themed, theme } = useAppTheme()
     const { top, bottom } = useSafeAreaInsets()
+    const { toggleDrawer } = useDrawer()
 
     const [searchQuery, setSearchQuery] = useState("")
     const [showFeaturedOnly, setShowFeaturedOnly] = useState(false)
@@ -143,7 +146,10 @@ export const PropertyListScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     return (
       <Screen preset="fixed" contentContainerStyle={$styles.flex1}>
         <AnimatedHeader backgroundColor={theme.colors.background}>
-          <Text preset="bold" style={themed($headerTitle)} tx="propertyListScreen:headerTitle" />
+          <View style={themed($headerRow)}>
+            <DrawerIconButton onPress={toggleDrawer} />
+            <Text preset="bold" style={themed($headerTitle)} tx="propertyListScreen:headerTitle" />
+          </View>
         </AnimatedHeader>
 
         <AnimatedLegendList<Property>
@@ -161,8 +167,14 @@ export const PropertyListScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     )
   }
 
+const $headerRow: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: spacing.md,
+})
+
 const $headerTitle: ThemedStyle<TextStyle> = ({ spacing }) => ({
-  paddingHorizontal: spacing.lg,
+  marginLeft: spacing.sm,
   fontSize: 18,
 })
 
